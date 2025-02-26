@@ -1,7 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors')
 
 const app = express();
+app.use(cors())
 app.use(express.json());
 
 app.use(morgan(`:method :url :status - :response-time ms`));
@@ -37,11 +39,11 @@ app.get('/info', (request, response) => {
   );
 });
 
-app.get('/api/persons', (requset, response) => {
+app.get('/api/phonebook', (requset, response) => {
   response.json(phonebook);
 });
 
-app.get('/api/persons/:id', (request, response) => {
+app.get('/api/phonebook/:id', (request, response) => {
   const id = request.params.id;
   const person = phonebook.find((person) => person.id === id);
 
